@@ -18,8 +18,10 @@
     <ClCompile Include="..\..\Exercices\main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Exercices\pi_circle.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Exercices\pi_circle.hpp">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

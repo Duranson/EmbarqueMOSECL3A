@@ -1,4 +1,3 @@
-﻿  pi_circle.cpp
-pi_circle.obj : error LNK2005: "double __cdecl estimate_pi(int)" (?estimate_pi@@YANH@Z) déjà défini(e) dans main.obj
-pi_circle.obj : error LNK2005: "double __cdecl randFloat(void)" (?randFloat@@YANXZ) déjà défini(e) dans main.obj
-D:\julbr\Documents\ecole\ECL\3A\MSO_Systeme_Embarque\EmbarqueMOSECL3A\ExercicesVS\Debug\ExercicesVS.exe : fatal error LNK1169: un ou plusieurs symboles définis à différentes reprises ont été rencontrés
+﻿  main.cpp
+D:\julbr\Documents\ecole\ECL\3A\MSO_Systeme_Embarque\EmbarqueMOSECL3A\Exercices\main.cpp(24,17): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+  ExercicesVS.vcxproj -> D:\julbr\Documents\ecole\ECL\3A\MSO_Systeme_Embarque\EmbarqueMOSECL3A\ExercicesVS\Debug\ExercicesVS.exe
