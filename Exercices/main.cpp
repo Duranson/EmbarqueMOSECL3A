@@ -7,10 +7,12 @@
 
 #include <iostream>
 #include <chrono>
+#include <thread>
+#include <future>
 
 // #include "horse_run_single_file.cpp"
 
-# include "pi_circle_sf.cpp"
+#include "pi_circle.cpp"
 
 int main(int argc, const char * argv[]) {
     auto start = std::chrono::high_resolution_clock::now();
@@ -18,10 +20,15 @@ int main(int argc, const char * argv[]) {
     // HorseRunSF game = HorseRunSF();
     
     // Pi Circle
+    double pi = 0.;
     int n_point = 1e8;
-    int n_threads = 4;
-    PiCircleSF picircle = PiCircleSF(n_point,n_threads);
-    auto result = picircle.estimate_pi();
+    int n_thread = 4;
+    std::future<double> results[n_thread];
+    for(int i = 0; i < n_thread ; i++)
+        results[i] = std::async(std::launch::deferred,estimate_pi, n_point / n_thread);
+    for(int i = 0; i < n_thread ; i++)
+        pi += results[i].get();
+    double result = pi / n_thread;
     
     // Show results
     auto end = std::chrono::high_resolution_clock::now();
