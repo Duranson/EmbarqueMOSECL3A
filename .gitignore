@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# Projet Visual Studio
+ExercicesVS/.vs/
