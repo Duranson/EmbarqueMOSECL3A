@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:/Users/fabienduranson/Desktop/Pougne:Pro/ECL/INFO/Embarque/Exercices/Exercices/Exercices/horse_run.cpp">
+   </FileRef>
+   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>

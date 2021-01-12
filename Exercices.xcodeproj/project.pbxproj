@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E91DDDBA25AE0A2D001AC83E /* test_parallel.hpp in Sources */ = {isa = PBXBuildFile; fileRef = E91DDDB925AE0A2D001AC83E /* test_parallel.hpp */; };
 		E9FDCEBC25ADEEA5008CC514 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E9FDCEBB25ADEEA5008CC514 /* main.cpp */; };
 		E9FDCEC925ADEED6008CC514 /* pi_circle.hpp in Sources */ = {isa = PBXBuildFile; fileRef = E9FDCEC525ADEED6008CC514 /* pi_circle.hpp */; };
+		E9FDCED525AE05C2008CC514 /* horse_run.hpp in Sources */ = {isa = PBXBuildFile; fileRef = E9FDCED425AE05C2008CC514 /* horse_run.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,9 +26,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E91DDDB925AE0A2D001AC83E /* test_parallel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = test_parallel.hpp; sourceTree = "<group>"; };
 		E9FDCEB825ADEEA5008CC514 /* Exercices */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Exercices; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9FDCEBB25ADEEA5008CC514 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E9FDCEC525ADEED6008CC514 /* pi_circle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pi_circle.hpp; sourceTree = "<group>"; };
+		E9FDCED425AE05C2008CC514 /* horse_run.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = horse_run.hpp; path = "/Users/fabienduranson/Desktop/Pougne:Pro/ECL/INFO/Embarque/Exercices/Exercices/Exercices/horse_run.hpp"; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +63,10 @@
 		E9FDCEBA25ADEEA5008CC514 /* Exercices */ = {
 			isa = PBXGroup;
 			children = (
+				E9FDCED425AE05C2008CC514 /* horse_run.hpp */,
 				E9FDCEC525ADEED6008CC514 /* pi_circle.hpp */,
 				E9FDCEBB25ADEEA5008CC514 /* main.cpp */,
+				E91DDDB925AE0A2D001AC83E /* test_parallel.hpp */,
 			);
 			path = Exercices;
 			sourceTree = "<group>";
@@ -123,6 +129,8 @@
 			files = (
 				E9FDCEBC25ADEEA5008CC514 /* main.cpp in Sources */,
 				E9FDCEC925ADEED6008CC514 /* pi_circle.hpp in Sources */,
+				E91DDDBA25AE0A2D001AC83E /* test_parallel.hpp in Sources */,
+				E9FDCED525AE05C2008CC514 /* horse_run.hpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

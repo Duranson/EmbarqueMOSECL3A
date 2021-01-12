@@ -1,31 +1,44 @@
 //
-//  horse_run.hpp
+//  horse_run_single_file.cpp
 //  Embarque-Exercices
 //
 //  Created by Fabien Duranson on 12/01/2021.
 //
 
-#ifndef horse_run_hpp
-#define horse_run_hpp
-
 #include <stdio.h>
+
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
+#include <unistd.h>
+#include <thread>
+#include <chrono>
+#include <future>
 
-class HorseRun
+char nth_letter(int n)
 {
-private:
-    int nHorses;
-    int nColonnes;
-    void courir(int);
-public:
-    HorseRun();
-    HorseRun(int n_horse, int NB_colonnes);
-    int start();
-    static void moveto(int, int);
-    static void erase_scr();
-    static void set_curseur_visible();
-    static void set_curseur_invisible();
-    static void puts(char[]);
-};
+    assert(n >= 0 && n <= 25);
+    return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[n];
+}
+void moveto(int lig, int col) { printf("\033[%d;%df",lig, col); };
+void erase_scr() { printf("\033[2J");}
+void set_curseur_visible() { printf("\x1B[?25h"); }
+void set_curseur_invisible() { printf("\x1B[?25l"); }
+void puts( char* mon_signe){ printf(mon_signe); }
 
-#endif /* horse_run_hpp */
+void courir(int ma_ligne, int nColonnes) {
+    std::cout << "Thread" << ma_ligne << "lance \n";
+    int i;
+    char mon_signe[3] = {nth_letter(ma_ligne), '>', 0};
+    // donnerra de ’A’.. ’Z’
+    for (i=0; i < nColonnes; i++)
+    {
+        moveto(ma_ligne, i);
+        erase_scr();
+        moveto(ma_ligne, i);
+        puts(mon_signe);
+        usleep(50000*(rand()%3+1));
+        // OU std::this thread::sleep for(std::chrono::nanoseconds(50000*(rand()%3+1)));
+    }
+    set_curseur_visible();
+}
