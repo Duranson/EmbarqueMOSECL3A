@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Exercices\main.cpp" />
-    <ClCompile Include="..\..\Exercices\pi_circle_sf.cpp" />
+    <ClCompile Include="..\..\Exercices\pi_circle.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -18,7 +18,7 @@
     <ClCompile Include="..\..\Exercices\main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\Exercices\pi_circle_sf.cpp">
+    <ClCompile Include="..\..\Exercices\pi_circle.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

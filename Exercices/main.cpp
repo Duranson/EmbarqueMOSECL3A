@@ -22,7 +22,7 @@ int main(int argc, const char * argv[]) {
     // Pi Circle
     double pi = 0.;
     int n_point = 1e8;
-    int n_thread = 4;
+    const int n_thread = 4;
     std::future<double> results[n_thread];
     for(int i = 0; i < n_thread ; i++)
         results[i] = std::async(std::launch::deferred,estimate_pi, n_point / n_thread);
