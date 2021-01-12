@@ -5,6 +5,9 @@
 //  Created by Fabien Duranson on 12/01/2021.
 //
 
+#ifndef pi_circle_hpp
+#define pi_circle_hpp
+
 #include <stdio.h>
 #include <iostream>
     
@@ -21,3 +24,5 @@ double estimate_pi(int n_iter_subfunc)
     }
     return 4. * (double) count / (double) n_iter_subfunc;
 }
+
+#endif
