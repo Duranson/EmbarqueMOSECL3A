@@ -1,0 +1,3 @@
+﻿  main.cpp
+D:\julbr\Documents\ecole\ECL\3A\MSO_Systeme_Embarque\EmbarqueMOSECL3A\Exercices\main.cpp(21,17): warning C4244: 'initialisation' : conversion de 'double' en 'int', perte possible de données
+  ExercicesVS.vcxproj -> D:\julbr\Documents\ecole\ECL\3A\MSO_Systeme_Embarque\EmbarqueMOSECL3A\ExercicesVS\Debug\ExercicesVS.exe
