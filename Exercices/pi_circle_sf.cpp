@@ -10,5 +10,27 @@
 
 class PiCircleSF
 {
-    double rand() { return std::rand() / std::RAND_MAX; }
-}
+public:
+    int n_points;
+    int n_threads;
+    
+    PiCircleSF(int nPoints, int nThreads)
+    {
+        n_points = nPoints;
+        n_threads = nThreads;
+    }
+    
+    double rand() { return (double) std::rand() / (double) RAND_MAX; }
+    
+    double estimate_pi()
+    {
+        int count = 0;
+        for (int i = 0; i < n_points; i++)
+        {
+            double x = rand();
+            double y = rand();
+            if (x*x + y*y < 1) count++;
+        }
+        return 4. * (double) count / (double) n_points;
+    }
+};

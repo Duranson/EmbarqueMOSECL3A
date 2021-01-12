@@ -16,9 +16,17 @@ int main(int argc, const char * argv[]) {
     // Horse Run
     // HorseRunSF game = HorseRunSF();
     
+    // Pi Circle
+    int n_point = 1e8;
+    int n_threads = 4;
+    PiCircleSF picircle = PiCircleSF(n_point,n_threads);
+    auto result = picircle.estimate_pi();
+    
+    // Show results
     auto end = std::chrono::high_resolution_clock::now();
     auto diff = end - start;
-    auto diff_sec = std::chrono::duration_cast<std::chrono::nanoseconds>(diff);
-    std::cout << "Temps pour threads = "<< diff_sec.count() << "ns ";
+    auto diff_sec = std::chrono::duration_cast<std::chrono::milliseconds>(diff);
+    std::cout << "Temps pour threads = "<< diff_sec.count() << "ms " << std::endl;
+    std::cout << "Résultat : " << result << std::endl;
     return 0;
 }
