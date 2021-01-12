@@ -11,7 +11,7 @@
 
 // #include "horse_run_single_file.cpp"
 
-#include "pi_circle.cpp"
+#include "pi_circle.hpp"
 
 int main(int argc, const char * argv[]) {
     auto start = std::chrono::high_resolution_clock::now();
@@ -20,8 +20,8 @@ int main(int argc, const char * argv[]) {
     
     // Pi Circle
     double pi = 0.;
-    int n_point = 1e8;
-    int n_thread = 4;
+    int n_point = 1e7;
+    int n_thread = 20;
     std::future<double> results[n_thread];
     for(int i = 0; i < n_thread ; i++)
         results[i] = std::async(std::launch::deferred,estimate_pi, n_point / n_thread);
