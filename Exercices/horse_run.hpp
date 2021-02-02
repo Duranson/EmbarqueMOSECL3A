@@ -10,23 +10,22 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <unistd.h>
 #include <thread>
 #include <chrono>
 #include <future>
 
 char nth_letter(int n)
 {
-    assert(n >= 0 && n <= 25);
-    return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[n];
+    return "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[n - 1];
 }
 void moveto(int lig, int col) { printf("\033[%d;%df",lig, col); };
 void erase_scr() { printf("\033[2J");}
+void erase_line() { printf("\033[1K");}
 void set_curseur_visible() { printf("\x1B[?25h"); }
 void set_curseur_invisible() { printf("\x1B[?25l"); }
-void puts( char* mon_signe){ printf(mon_signe); }
 
 void courir(int ma_ligne, int nColonnes) {
+    moveto(ma_ligne, 30);
     std::cout << "Thread" << ma_ligne << "lance \n";
     int i;
     char mon_signe[3] = {nth_letter(ma_ligne), '>', 0};
@@ -34,11 +33,10 @@ void courir(int ma_ligne, int nColonnes) {
     for (i=0; i < nColonnes; i++)
     {
         moveto(ma_ligne, i);
-        erase_scr();
+        erase_line();
         moveto(ma_ligne, i);
         puts(mon_signe);
-        usleep(50000*(rand()%3+1));
-        // OU std::this thread::sleep for(std::chrono::nanoseconds(50000*(rand()%3+1)));
+        std::this_thread::sleep_for(std::chrono::milliseconds(50*(rand()%3+1)));
     }
     set_curseur_visible();
 }
