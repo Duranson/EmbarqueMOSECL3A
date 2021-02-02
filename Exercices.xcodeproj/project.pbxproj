@@ -27,6 +27,7 @@
 
 /* Begin PBXFileReference section */
 		E91DDDB925AE0A2D001AC83E /* test_parallel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = test_parallel.hpp; sourceTree = "<group>"; };
+		E943E4E125C9A84F001369DB /* quick_sort.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = quick_sort.hpp; sourceTree = "<group>"; };
 		E9FDCEB825ADEEA5008CC514 /* Exercices */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Exercices; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9FDCEBB25ADEEA5008CC514 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E9FDCEC525ADEED6008CC514 /* pi_circle.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = pi_circle.hpp; sourceTree = "<group>"; };
@@ -67,6 +68,7 @@
 				E9FDCEC525ADEED6008CC514 /* pi_circle.hpp */,
 				E9FDCEBB25ADEEA5008CC514 /* main.cpp */,
 				E91DDDB925AE0A2D001AC83E /* test_parallel.hpp */,
+				E943E4E125C9A84F001369DB /* quick_sort.hpp */,
 			);
 			path = Exercices;
 			sourceTree = "<group>";
