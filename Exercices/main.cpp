@@ -9,13 +9,15 @@
 #include <chrono>
 #include <thread>
 #include <future>
-
-// #include "horse_run_single_file.cpp"
+#include <vector>
+#include <mutex>
 
 #include "pi_circle.hpp"
 #include "horse_run.hpp"
 #include "test_parallel.hpp"
 //#include "game_of_life.hpp"
+
+std::mutex mtx;
 
 double test()
 {
@@ -34,15 +36,18 @@ double test()
 
 double horseRun(int nColonnes, int nHorses)
 {
-    std::thread tab_id1[nHorses];
-    int tab_num_ligne_a_ecran[nHorses]; // les valeurs envoy ́ees aux threads srand(time(NULL));
+    std::vector<std::thread> tab_id1(nHorses);
+    std::vector<int> tab_num_ligne_a_ecran(nHorses); // les valeurs envoy ́ees aux threads srand(time(NULL));
     erase_scr(); // On efface l’ ́ecran
-    set_curseur_invisible(); moveto(nHorses + 2,1);
+    set_curseur_invisible();
+    moveto(nHorses + 2,1);
+    mtx.lock();
     std::cout << "Creations des threads \n";
+    mtx.unlock();
     for (int i = 0; i < nHorses; i++)
     {
-        tab_num_ligne_a_ecran[i]=i+1;
-        tab_id1[i] = std::thread(courir, tab_num_ligne_a_ecran[i], nColonnes);//, mutex);
+        tab_num_ligne_a_ecran[i] = i + 1;
+        tab_id1[i] = std::thread(courir, tab_num_ligne_a_ecran[i], nColonnes, &mtx);
     }
     moveto(nHorses + 2,2);
     std::cout << "ATTENTIONS : Sans Join, Main termine et les threads s’arrˆetent\n" ;
