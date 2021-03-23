@@ -43,7 +43,6 @@ void courir(int ma_ligne, int nColonnes, std::mutex *mtx, std::vector<int> *scor
         mtx->unlock();
         std::this_thread::sleep_for(std::chrono::milliseconds(50*(rand()%3+1)));
     }
-    set_curseur_visible();
 }
 
 void arbitrer(int nHorses, int nColumns, std::mutex *mtx, std::vector<int> *scores)

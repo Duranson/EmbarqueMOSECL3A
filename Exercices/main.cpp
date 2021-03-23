@@ -11,11 +11,13 @@
 #include <future>
 #include <vector>
 #include <mutex>
+#include <unistd.h>
 
 #include "pi_circle.hpp"
 #include "horse_run.hpp"
 #include "test_parallel.hpp"
 #include "quick_sort.hpp"
+#include "game_of_life.hpp"
 
 std::mutex mtx;
 
@@ -99,9 +101,77 @@ std::vector<double> quick_sort_multi_thread(std::vector<double> v, int *nThreads
     }
 }
 
-int main(int argc, const char * argv[]) {
+void game_of_life_multi_thread(int nThreads, int grid_width, int grid_height, double proportion, int max_iter)
+{
+    cv::namedWindow("Game of life", cv::WINDOW_NORMAL);
+    if (grid_width < grid_height)
+        std::swap(grid_width, grid_height);
+    int columns = pow(2,ceil(log2(sqrt(nThreads))));
+    int lines = round(pow(2,floor(log2(nThreads))) / columns);
     
-    std::cout << "Quel programme voulez-vous executer ? \n 1. \t Test \n 2. \t Horse Run \n 3. \t Pi estimation \n 4. \t Quick Sort \n" << std::endl;
+    std::vector<std::vector<bool>> grid = generate_initial_grid(grid_width, grid_height, proportion);
+    
+    show_state_img(0,grid);
+    //show_state_print(0,grid);
+    cv::resizeWindow("Game of life", 800, 400);
+    
+    std::vector<std::future<std::vector<std::vector<bool>>>> threads(columns * lines);
+    
+    std::vector<std::vector<std::vector<bool>>> results(columns * lines);
+    
+    for (int iter = 0; iter < max_iter; iter++)
+    {
+        //std::vector<std::vector< std::vector<std::vector<bool>> >> partial_grids;
+        for (int column = 0; column < columns; column++)
+        {
+            for (int line = 0; line < lines; line++)
+            {
+                int x1 = grid_width / columns * column + 1;
+                int x2 = grid_width / columns * (column + 1) + 1;
+                int y1 = grid_height / lines * line + 1;
+                int y2 = grid_height / lines * (line + 1) + 1;
+                threads[column * lines + line] = std::async(std::launch::deferred,process_partial_grid,x1, x2, y1, y2, grid, &mtx);
+                //results[column * lines + line] = process_partial_grid(x1, x2, y1, y2, grid, &mtx);
+            }
+        }
+        for (int column = 0; column < columns; column++)
+        {
+            for (int line = 0; line < lines; line++)
+            {
+                int x1 = grid_width / columns * column + 1;
+                int x2 = grid_width / columns * (column + 1) + 1;
+                int y1 = grid_height / lines * line + 1;
+                int y2 = grid_height / lines * (line + 1) + 1;
+                
+                int i = column * lines + line;
+                
+                std::vector<std::vector<bool>> partial_grid = threads[i].get();
+                //std::vector<std::vector<bool>> partial_grid = results[i];
+                
+                for (int x = x1; x < x2; x++)
+                {
+                    for (int y = y1; y < y2; y++)
+                    {
+                        grid[y][x] = partial_grid[y - y1][x - x1];
+                    }
+                }
+            }
+        }
+        //usleep(1000); // Sleep 1000 milliseconds
+        //show_state_print(iter + 1, grid);
+        show_state_img(iter + 1,grid);
+        /*int c = 0;
+        std::cout << "Next generation ? (Press 1)" << std::endl;
+        std::cin >> c;
+        if (c != 1)
+            break;*/
+        std::cout << "Generation " << iter + 1 << " done." << std::endl;
+    }
+    cv::destroyWindow("A_good_name");
+}
+
+int main(int argc, const char * argv[]) {
+    std::cout << "Quel programme voulez-vous executer ? \n 1. \t Test \n 2. \t Horse Run \n 3. \t Pi estimation \n 4. \t Quick Sort \n 5. \t Game of Life \n" << std::endl;
     int script;
     std::cin >> script;
     
@@ -154,13 +224,37 @@ int main(int argc, const char * argv[]) {
             std::vector<double> v;
             for (int i = 0; i < n_element; i++)
             {
-                v.push_back( rand() % 2000 - 1000 );
+                v.push_back( rand() % (2 * n_element) - n_element );
             }
             std::vector<double> v_sorted = quick_sort_multi_thread(v, &nThreads);
             std::cout << "Résultat trié :" << std::endl;
-            for(double& d : v_sorted)
+            /*for(double& d : v_sorted)
                 std::cout << d << ", " ;
-            std::cout << std::endl;
+            std::cout << std::endl;*/
+            break;
+            
+        }
+        case 5:
+        {
+            // Horse Run -> a executer à part : /Users/fabienduranson/Library/Developer/Xcode/DerivedData/Exercices-cgbqlfdjzfecmzgjnobqmdkxsixc/Build/Products/Release/Exercices
+            int nThreads = 4;
+            int grid_width = 128;
+            int grid_height = 64;
+            double proportion = 0.3;
+            int max_iter = 10000;
+            /*std::cout << "Nombre de threads (1,2,4,8,16,32 ou 64) :";
+            std::cin >> nThreads;
+            std::cout << "Largeur de la grille :";
+            std::cin >> grid_width;
+            std::cout << "Hauteur de la grille :";
+            std::cin >> grid_height;
+            std::cout << "Proportion de cellules vivantes à l'étape 0 :";
+            std::cin >> proportion;
+            std::cout << "Nombre d'étapes :";
+            std::cin >> max_iter;*/
+            start = std::chrono::high_resolution_clock::now();
+            game_of_life_multi_thread(nThreads, grid_width, grid_height, proportion, max_iter);
+            std::cout << "Simulation terminée !" << std::endl;
             break;
             
         }
